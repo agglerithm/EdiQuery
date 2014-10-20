@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C1F3156C-BA0E-4BA3-9F4C-4B97456884A8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EdiQuery</RootNamespace>
+    <AssemblyName>EdiQuery</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Containers\DocContainer.cs" />
+    <Compile Include="Containers\EdiFileContainer.cs" />
+    <Compile Include="EdiQuery.cs" />
+    <Compile Include="Containers\GroupContainer.cs" />
+    <Compile Include="Containers\InterchangeContainer.cs" />
+    <Compile Include="EDIConstants.cs" />
+    <Compile Include="EdiFileInfo.cs" />
+    <Compile Include="EdiFileReader.cs" />
+    <Compile Include="EDIUtilities.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\FormattingExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IAddressParser.cs" />
+    <Compile Include="IDocumentParser.cs" />
+    <Compile Include="IEdiInContainer.cs" />
+    <Compile Include="IHierarchySplitter.cs" />
+    <Compile Include="impl\AddressParser.cs" />
+    <Compile Include="impl\Generic850Parser.cs" />
+    <Compile Include="impl\GenericDocParser.cs" />
+    <Compile Include="impl\POLineParser.cs" />
+    <Compile Include="impl\SegmentSplitter.cs" />
+    <Compile Include="IPOLineParser.cs" />
+    <Compile Include="ISegmentSplitter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structs\EdiSegmentCollection.cs" />
+    <Compile Include="Structs\Segment.cs" />
+    <Compile Include="Structs\SegmentLabel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
