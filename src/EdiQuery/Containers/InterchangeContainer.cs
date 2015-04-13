@@ -8,17 +8,23 @@ namespace EdiQuery.Containers
     public class InterchangeContainer : IEdiInContainer
     {
         private EdiSegmentCollection _segments;
-        private IList<GroupContainer> _groups = new List<GroupContainer>();
+        private readonly IList<GroupContainer> _groups = new List<GroupContainer>();
 
         public InterchangeContainer(EdiSegmentCollection segs)
         {
             _segments = segs;
-            var seg = _segments.FirstWith(SegmentLabel.InterchangeLabel);
-            if (seg == null) return;
-            var arr = seg.GetElements(segs.ElementDelimiter);
+            ElementDelimiter = segs.ElementDelimiter; 
+            Segment = _segments.FirstWith(SegmentLabel.InterchangeLabel);
+            if (Segment == null) return;
+            var arr = Segment.GetElements(segs.ElementDelimiter);
             SenderId = arr[6].Trim();
             ControlNumber = arr[10].Trim();
         }
+
+        public string ElementDelimiter { get; private set; }
+        public string SegmentDelimiter { get; private set; }
+
+        public Segment Segment { get; private set; }
 
         protected string ControlNumber { get; private set; }
 

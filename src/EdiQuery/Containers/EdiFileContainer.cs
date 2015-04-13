@@ -1,44 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EdiQuery.Entities;
 using EdiQuery.Structs;
 
 namespace EdiQuery.Containers
 {
     public class EdiFileContainer : IEdiInContainer
     {
-        private readonly IList<InterchangeContainer> _interchanges = new List<InterchangeContainer>();
+        private readonly IList<EdiInterchange> _interchanges = new List<EdiInterchange>();
         private EdiSegmentCollection _segments;
 
         public IQueryable<T> Query<T>()
         {
-            return new EdiQuery();
+            return null;
         }
         public EdiFileContainer(EdiSegmentCollection segs)
         {
             _segments = segs;
         }
-        public void AddSegments(EdiSegmentCollection segs)
-        {
-            CreateChild(segs);
-        }
+ 
 
         public IEnumerable<Segment> InnerSegments
         {
             get { return _segments.SegmentList; }
         }
 
-        public IEnumerable<InterchangeContainer> Interchanges
+        public IEnumerable<EdiInterchange> Interchanges
         {
             get { return _interchanges; } 
         }
 
-
-        public IEdiInContainer CreateChild(EdiSegmentCollection segs)
-        {
-            var child = new InterchangeContainer(segs);
-            _interchanges.Add(child);
-            return child;
-        }
+ 
  
     }
 }

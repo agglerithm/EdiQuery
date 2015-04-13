@@ -12,7 +12,30 @@ namespace EdiQuery.Extensions
                 return dte.ToString("yyyyMMdd");
             return dte.ToString("yyMMdd");
         }
+        public static int GetEdiHours(this string ediTime)
+        {
+            return ediTime.Substring(0, 2).CastToInt();
+        }
+        public static int GetEdiMinutes(this string ediTime)
+        {
+            return ediTime.Substring(2, 2).CastToInt();
+        }
 
+        public static int GetEdiSeconds(this string ediTime)
+        {
+            if (ediTime.Length < 6) return 0;
+            return ediTime.Substring(4, 2).CastToInt();
+        }
+
+        public static DateTime DateTimeFromEdiDateTime(this string ediDate, string ediTime)
+        {
+            var dte = ediDate.DateFromEDIDate();
+            dte = dte.AddHours(ediTime.GetEdiHours());
+            dte = dte.AddMinutes(ediTime.GetEdiMinutes());
+            dte = dte.AddSeconds(ediTime.GetEdiSeconds());
+            return dte;
+
+        }
         public static DateTime DateFromEDIDate(this string ediDate)
         {
             int num;
@@ -96,6 +119,10 @@ namespace EdiQuery.Extensions
             return (int)d;
         }
 
+        public static string ElementLabel(this string segmentLabel, int ndx)
+        {
+            return segmentLabel + ndx.ToString("00");
+        }
         public static DateTime CastToDateTime(this string dte)
         {
             DateTime dt;
